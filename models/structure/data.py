@@ -18,3 +18,6 @@ class ClientCollection(UniqueIdentifiedObjectCollection):
 
     def __init__(self, *args):
         super().__init__(*args)
+
+    def list_emails(self):
+        return self.email

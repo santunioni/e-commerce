@@ -7,8 +7,6 @@ class IdentifiedPerson(Person):
         super().__init__(username=username, full_name=full_name, email=email)
         self.__identifier = self.__email
 
-    # TODO: implement a more general way to identify people
-
     @property
     def identifier(self):
         return self.__identifier

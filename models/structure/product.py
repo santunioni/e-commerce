@@ -58,5 +58,3 @@ class IdentifiedProduct(Product):
     @identifier.setter
     def identifier(self, identifier):
         self.__identifier = identifier
-
-

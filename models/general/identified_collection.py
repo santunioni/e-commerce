@@ -10,6 +10,12 @@ class UniqueIdentifiedObjectCollection():
     def __sub__(self, *args):
         self.remove(args)
 
+    def __contains__(self, identified_object):
+        return self.contains(identified_object)
+
+    def __get__(self, identified_object):
+        return self.get(identified_object)
+
     def add(self, *args):
         for identified_object in args:
             if not self.contains(identified_object):
@@ -22,6 +28,10 @@ class UniqueIdentifiedObjectCollection():
 
     def contains(self, identified_object, /):
         return identified_object.identifier in self.__collection.keys()
+
+    def get(self, identifier):
+        if identifier in self.__collection.keys():
+            return self.__collection['identifier']
 
     def search(self):
         # TODO: implement the search method()

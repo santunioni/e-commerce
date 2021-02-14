@@ -1,11 +1,10 @@
-# TODO: market app
-#     TODO: sign up clients
-#     TODO: list products
-#     TODO: buy products (cart)
+import os
+import models.market as market
 
+DIR = os.getcwd()
 
 def main():
-    pass
+    market.run()
 
 
 if __name__ == '__main__':
