@@ -1,10 +1,10 @@
 class Product:
 
-    def __init__(self, name: str, price: float, tags: set[str] = set(), description: str = ""):
+    def __init__(self, name: str, price: float, description: str = ""):
         self.__name = name
         self.__price = price
-        self.__tags = tags
         self.__description = description
+        self.__tags = set()
 
     @property
     def name(self):
@@ -37,6 +37,8 @@ class Product:
     def tags(self):
         return self.__tags
 
+    # TODO: implement the add_tags and remove_tags methods
+
 
 class IdentifiedProduct(Product):
 
@@ -56,3 +58,5 @@ class IdentifiedProduct(Product):
     @identifier.setter
     def identifier(self, identifier):
         self.__identifier = identifier
+
+
