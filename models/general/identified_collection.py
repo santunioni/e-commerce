@@ -1,14 +1,15 @@
 class UniqueIdentifiedObjectCollection:
 
-    def __init__(self, *args):
+    def __init__(self):
         self.__collection = dict()
 
     def __contains__(self, identified_object):
         return self.contains(identified_object)
 
     def __getitem__(self, identifier):
+        print(f"{identifier = }")
         if identifier in self.__collection.keys():
-            return self.__collection['identifier']
+            return self.__collection[identifier]
 
     @property
     def collection(self):
@@ -78,3 +79,12 @@ class MultipleIdentifiedObjectCollection:
 
     def contains(self, identified_object, /):
         return identified_object.identifier in self.__collection.keys()
+
+    @property
+    def collection(self):
+        return self.__collection
+
+    @collection.setter
+    def collection(self, dictionary):
+        for entry_key in dictionary:
+            self.__collection[entry_key] = dictionary[entry_key]

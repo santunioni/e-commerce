@@ -1,5 +1,5 @@
-import models.market as market
-import models.interface.screen as screen
+import run.market as market
+import run.interface.screen as screen
 from models.structure.client import Client
 import pickle
 from time import sleep
@@ -21,9 +21,9 @@ def login(*, email, password):
     with open(path, 'rb') as file:
         clients_list = pickle.load(file)
     if email in clients_list.emails:
-        current_user = clients_list['email']
+        current_user = clients_list[email]
         if current_user.check_pass(password):
-            market.status['current_user'] = clients_list['email']
+            market.status['current_user'] = clients_list[email]
         else:
             print("Wrong password!")
             sleep(2)

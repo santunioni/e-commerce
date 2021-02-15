@@ -1,5 +1,5 @@
-import models.interface.request as request
-import models.market as market
+import run.interface.request as request
+import run.market as market
 from utils.utility import clear
 
 
@@ -74,33 +74,31 @@ class ClientScreen(GeneralScreen):
         clear()
         if market.status['current_user']:
             kart = market.status['current_user'].kart
-            print("="*50)
+            print("="*75)
             print("Product ID \t\t product name \t\t price \t\t amount")
-            print("-"*50)
+            print("-"*75)
             print("")
             for product in kart:
                 amount, obj = product['amount'], product['object']
                 print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
-            print("="*50)
-            # while (command := input("Digite o número do produto que deseja adicionar ao carrinho (quit para sair): ")) \
-            #         != 'quit':
-            #     if command in range(1, len(kart) + 1):
-            #         market.status['current_user'].kart.add(kart[int(command)])
+            print("="*75)
             input("Press enter to leave: ")
 
     @staticmethod
     def display_products():
         clear()
         inventory = request.inventory()
-        print(inventory)
+        print("="*75)
+        print("Product ID \t\t product name \t\t price \t\t amount available")
+        print("-"*75)
+        print("")
+        for product in inventory:
+            amount, obj = product['amount'], product['object']
+            print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
+        print("="*75)
         if market.status['current_user']:
-            while (command := input("Digite o número do produto que deseja adicionar ao carrinho (quit para sair): ")) \
-                    != 'quit':
-                if command in range(1, len(inventory) + 1):
-                    market.status['current_user'].kart.add(inventory[int(command)])
-        else:
-            input("Press enter to leave: ")
-
+            pass
+        input("Press enter to leave: ")
 
 class EmployeeScreen(GeneralScreen):
 

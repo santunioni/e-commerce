@@ -24,7 +24,6 @@ class ClientCollection(UniqueIdentifiedObjectCollection):
         return (client_email for client_email in super().collection.keys())
 
 
-
 class EmployeeCollection(UniqueIdentifiedObjectCollection):
 
     def __init__(self, *args):
