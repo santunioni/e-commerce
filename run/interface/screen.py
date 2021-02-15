@@ -1,3 +1,4 @@
+import run.interface.credentials
 import run.interface.request as request
 import run.market as market
 from utils.utility import clear
@@ -22,7 +23,7 @@ class GeneralScreen:
         clear()
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        request.login(email=email, password=password)
+        run.interface.credentials.login(email=email, password=password)
 
     @staticmethod
     def sign_in():
@@ -30,7 +31,7 @@ class GeneralScreen:
         full_name = input("Tell me you full namee: ")
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        request.sign_in(full_name=full_name, email=email, password=password)
+        run.interface.credentials.sign_in(full_name=full_name, email=email, password=password)
 
 
 class ClientScreen(GeneralScreen):
@@ -43,7 +44,7 @@ class ClientScreen(GeneralScreen):
             options = [ClientScreen.display_products,
                        ClientScreen.display_kart,
                        request.close_order,
-                       request.logout]
+                       run.interface.credentials.logout]
             while (number := int(input("""
             Select an option: 
         

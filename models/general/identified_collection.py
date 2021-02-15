@@ -33,7 +33,7 @@ class UniqueIdentifiedObjectCollection:
         return identified_object.identifier in self.__collection.keys()
 
     def search(self):
-        # TODO: implement the search method()
+        # TODO: implement the search() method
         pass
 
     def merge(self):
