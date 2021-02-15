@@ -1,5 +1,5 @@
-from models.general.identified_collection import UniqueIdentifiedObjectCollection
-from models.general.identified_collection import MultipleIdentifiedObjectCollection
+from system.general_purpose.person_identified_collection import UniqueIdentifiedObjectCollection
+from system.general_purpose.person_identified_collection import MultipleIdentifiedObjectCollection
 
 
 class Inventory(MultipleIdentifiedObjectCollection):

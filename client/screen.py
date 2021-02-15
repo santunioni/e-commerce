@@ -1,20 +1,7 @@
-import run.interface.credentials
-import run.interface.request as request
-import run.market as market
-import settings
-from utils.utility import clear
-
-
-def initial_page():
-    clear()
-    if not settings.status['user_type']:
-        while (user_label := input('Are you a client or a employee here (c/e)? ').lower()[0]) not in ['c', 'e']:
-            continue
-        settings.status['user_type'] = 'client' if user_label == 'c' else 'employee'
-    elif settings.status['user_type'] == 'client':
-        ClientScreen.initial_page()
-    elif settings.status['user_type'] == 'employee':
-        EmployeeScreen.initial_page()
+import client.session
+import system.sys_functions.request as request
+from system import globals
+from system.general.utility import clear
 
 
 class GeneralScreen:
@@ -24,7 +11,7 @@ class GeneralScreen:
         clear()
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        run.interface.credentials.login(email=email, password=password)
+        client.run.interface.credentials.login(email=email, password=password)
 
     @staticmethod
     def sign_in():
@@ -32,7 +19,7 @@ class GeneralScreen:
         full_name = input("Tell me you full namee: ")
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        run.interface.credentials.sign_in(full_name=full_name, email=email, password=password)
+        client.run.interface.credentials.sign_in(full_name=full_name, email=email, password=password)
 
 
 class ClientScreen(GeneralScreen):
@@ -40,12 +27,12 @@ class ClientScreen(GeneralScreen):
     @staticmethod
     def initial_page():
         clear()
-        client = settings.status['current_user']
+        client = client.session.status['current_user']
         if client:
             options = [ClientScreen.display_products,
                        ClientScreen.display_kart,
                        request.close_order,
-                       run.interface.credentials.logout]
+                       client.run.interface.credentials.logout]
             while (number := int(input("""
             Select an option: 
         
@@ -74,8 +61,8 @@ class ClientScreen(GeneralScreen):
     @staticmethod
     def display_kart():
         clear()
-        if settings.status['current_user']:
-            kart = settings.status['current_user'].kart
+        if client.session.status['current_user']:
+            kart = client.session.status['current_user'].kart
             print("="*75)
             print("Product ID \t\t product name \t\t price \t\t amount")
             print("-"*75)
@@ -98,14 +85,6 @@ class ClientScreen(GeneralScreen):
             amount, obj = product['amount'], product['object']
             print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
         print("="*75)
-        if settings.status['current_user']:
+        if client.session.status['current_user']:
             pass
         input("Press enter to leave: ")
-
-
-class EmployeeScreen(GeneralScreen):
-
-    @staticmethod
-    def initial_page(logged=False):
-        # TODO: implement the initial page for employees
-        pass

@@ -1,5 +1,5 @@
-from models.general.identified_collection import MultipleIdentifiedObjectCollection
-from models.general.identified_person import IdentifiedPerson
+from system.general_purpose.person_identified_collection import MultipleIdentifiedObjectCollection
+from system.general_purpose.person_identified import IdentifiedPerson
 from passlib.hash import pbkdf2_sha256 as cryp
 
 

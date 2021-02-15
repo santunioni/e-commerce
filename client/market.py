@@ -1,14 +1,14 @@
-import run.interface.screen as screen
+from client import run as screen
 
-from models.structure.product import Product
-from models.structure.data import (ClientCollection,
-                                   EmployeeCollection,
-                                   Inventory)
+from system.market_structure.product import Product
+from system.market_structure.market_collections import (ClientCollection,
+                                                        EmployeeCollection,
+                                                        Inventory)
 
-from settings import (CLIENTS_LIST_PATH,
-                      EMPLOYEES_LIST_PATH,
-                      INVENTORY_PATH_CSV,
-                      INVENTORY_PATH_PICKLE)
+from system.globals import (CLIENTS_LIST_PATH,
+                            EMPLOYEES_LIST_PATH,
+                            INVENTORY_PATH_CSV,
+                            INVENTORY_PATH_PICKLE)
 
 from os.path import exists as os_path_exists
 from csv import DictReader

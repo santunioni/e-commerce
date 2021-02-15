@@ -1,4 +1,4 @@
-from models.general.identified_person import IdentifiedPerson
+from system.general_purpose.person_identified import IdentifiedPerson
 
 
 class Worker(IdentifiedPerson):

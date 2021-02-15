@@ -88,3 +88,10 @@ class MultipleIdentifiedObjectCollection:
     def collection(self, dictionary):
         for entry_key in dictionary:
             self.__collection[entry_key] = dictionary[entry_key]
+
+    def amount_of(self, identified_object):
+        if identified_object in self:
+            return self.__collection[identified_object.identifier]['amount']
+        return 0
+
+    
