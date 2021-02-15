@@ -20,6 +20,10 @@ class Client(IdentifiedPerson):
     def check_pass(self, password):
         return cryp.verify(password, self.__password)
 
+    def close_order(self):
+        # TODO: implement the close_order() method
+        pass
+
 
 class Kart(MultipleIdentifiedObjectCollection):
 

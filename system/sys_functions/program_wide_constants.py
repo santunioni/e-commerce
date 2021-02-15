@@ -1,8 +1,9 @@
 # python libraries imports
 from os.path import join as os_path_join
+from os.path import abspath as os_path_abspath
 from os import pardir as parent_directory
 
-ROOT_DIR = parent_directory
+ROOT_DIR = os_path_abspath(parent_directory)
 
 CLIENTS_FILES_PATH = os_path_join(ROOT_DIR, 'database', 'clients')
 CLIENTS_EMAILS_LIST_PATH = os_path_join(ROOT_DIR, 'database', 'server', 'clients_emails.csv')
