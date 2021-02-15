@@ -1,9 +1,4 @@
 import run.market as market
-from os import getcwd
-
-
-DIR = getcwd()
-del getcwd
 
 
 def main():

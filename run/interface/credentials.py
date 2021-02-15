@@ -1,45 +1,42 @@
+import settings
+from models.structure.client import Client
+
 import pickle
 from time import sleep
 
-from models.structure.client import Client
-from run import market as market
-from run.interface import screen as screen
-
 
 def logout():
-    market.status['current_user'] = None
-    market.status['user_type'] = None
+    settings.status['current_user'] = None
+    settings.status['user_type'] = None
 
 
 def login(*, email, password):
 
-    if market.status['user_type'] == 'employee':
-        path = market.EMPLOYEES_LIST_PATH
+    if settings.status['user_type'] == 'employee':
+        path = settings.EMPLOYEES_LIST_PATH
     else:
-        path = market.CLIENTS_LIST_PATH
+        path = settings.CLIENTS_LIST_PATH
 
     with open(path, 'rb') as file:
         clients_list = pickle.load(file)
     if email in clients_list.emails:
         current_user = clients_list[email]
         if current_user.check_pass(password):
-            market.status['current_user'] = clients_list[email]
+            settings.status['current_user'] = clients_list[email]
         else:
             print("Wrong password!")
             sleep(2)
     else:
-        while (signin := input("User isn't registered. Want to sign in (y/n)? ")) not in ['y', 'n']:
-            continue
-        if signin == 'y':
-            screen.GeneralScreen.sign_in()
+        print("User isn't registered. Want to sign in (y/n)? ")
+        sleep(2)
 
 
 def sign_in(full_name, email, password):
 
-    if market.status['user_type'] == 'employee':
-        path = market.EMPLOYEES_LIST_PATH
+    if settings.status['user_type'] == 'employee':
+        path = settings.EMPLOYEES_LIST_PATH
     else:
-        path = market.CLIENTS_LIST_PATH
+        path = settings.CLIENTS_LIST_PATH
 
     with open(path, 'rb') as file:
         clients_list = pickle.load(file)
@@ -51,4 +48,4 @@ def sign_in(full_name, email, password):
         clients_list.add(current_user)
         with open(path, 'wb') as file:
             pickle.dump(clients_list, file)
-        market.status['current_user'] = current_user
+        settings.status['current_user'] = current_user

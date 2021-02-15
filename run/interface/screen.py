@@ -1,18 +1,19 @@
 import run.interface.credentials
 import run.interface.request as request
 import run.market as market
+import settings
 from utils.utility import clear
 
 
 def initial_page():
     clear()
-    if not market.status['user_type']:
+    if not settings.status['user_type']:
         while (user_label := input('Are you a client or a employee here (c/e)? ').lower()[0]) not in ['c', 'e']:
             continue
-        market.status['user_type'] = 'client' if user_label == 'c' else 'employee'
-    elif market.status['user_type'] == 'client':
+        settings.status['user_type'] = 'client' if user_label == 'c' else 'employee'
+    elif settings.status['user_type'] == 'client':
         ClientScreen.initial_page()
-    elif market.status['user_type'] == 'employee':
+    elif settings.status['user_type'] == 'employee':
         EmployeeScreen.initial_page()
 
 
@@ -39,7 +40,7 @@ class ClientScreen(GeneralScreen):
     @staticmethod
     def initial_page():
         clear()
-        client = market.status['current_user']
+        client = settings.status['current_user']
         if client:
             options = [ClientScreen.display_products,
                        ClientScreen.display_kart,
@@ -73,8 +74,8 @@ class ClientScreen(GeneralScreen):
     @staticmethod
     def display_kart():
         clear()
-        if market.status['current_user']:
-            kart = market.status['current_user'].kart
+        if settings.status['current_user']:
+            kart = settings.status['current_user'].kart
             print("="*75)
             print("Product ID \t\t product name \t\t price \t\t amount")
             print("-"*75)
@@ -97,9 +98,10 @@ class ClientScreen(GeneralScreen):
             amount, obj = product['amount'], product['object']
             print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
         print("="*75)
-        if market.status['current_user']:
+        if settings.status['current_user']:
             pass
         input("Press enter to leave: ")
+
 
 class EmployeeScreen(GeneralScreen):
 
