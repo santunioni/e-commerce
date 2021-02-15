@@ -1,10 +1,8 @@
-# TODO: implement storage into HD: Products for sell; Clients list; Client kart
 import models.market as market
 import models.interface.screen as screen
 from models.structure.client import Client
-import main
 import pickle
-import os
+from time import sleep
 
 
 def logout():
@@ -15,34 +13,45 @@ def logout():
 def login(*, email, password):
     # TODO: implement the login function
 
-    clients_list_path = os.path.join(main.DIR, 'database', market.status['user_type'], "clients.pickle")
-    with open(clients_list_path, 'rb') as file:
+    if market.status['user_type'] == 'employee':
+        path = market.EMPLOYEES_LIST_PATH
+    else:
+        path = market.CLIENTS_LIST_PATH
+
+    with open(path, 'rb') as file:
         clients_list = pickle.load(file)
     if email in clients_list:
-        market.status['current_user'] = clients_list['email']
-
+        current_user = clients_list['email']
+        if current_user.check_pass(password):
+            market.status['current_user'] = clients_list['email']
+        else:
+            print("Wrong password!")
+            sleep(2)
     else:
-        while (sign_in := input("User isn't registered. Want to sign in (y/n)? ")) not in ['y', 'n']:
+        while (signin := input("User isn't registered. Want to sign in (y/n)? ")) not in ['y', 'n']:
             continue
-        if sign_in == 'y':
+        if signin == 'y':
             screen.GeneralScreen.sign_in()
 
 
-def sign_in(email, password):
+def sign_in(full_name, email, password):
     # TODO: implement the sign_in function
 
-    file_path = os.path.join(main.DIR, 'database', market.status['user_type'], f"{email}.pickle")
-    try:
-        with open(file_path, 'wb') as file:
-            user =
-            pickle.dump(user, file)
-    except FileExistsError:
-        while (login := input("User already exist. Want to sign in (y/n)? ")) not in ['y', 'n']:
-            continue
-        if login == 'y':
-            screen.GeneralScreen.login()
+    if market.status['user_type'] == 'employee':
+        path = market.EMPLOYEES_LIST_PATH
+    else:
+        path = market.CLIENTS_LIST_PATH
 
-    market.status['current_user'] = user
+    with open(path, 'rb') as file:
+        clients_list = pickle.load(file)
+    if email in clients_list.emails:
+        print("User is already registered. Perhaps you want to log in? ")
+    else:
+        current_user = Client(full_name=full_name, email=email, password=password)
+        clients_list.add(current_user)
+        with open(path, 'wb') as file:
+            pickle.dump(clients_list, file)
+        market.status['current_user'] = current_user
 
 
 def close_order():

@@ -1,24 +1,25 @@
-class UniqueIdentifiedObjectCollection():
+class UniqueIdentifiedObjectCollection:
 
     def __init__(self, *args):
         self.__collection = dict()
-        self.add(args)
-
-    def __add__(self, *args):
-        self.add(args)
-
-    def __sub__(self, *args):
-        self.remove(args)
 
     def __contains__(self, identified_object):
         return self.contains(identified_object)
 
-    def __get__(self, identified_object):
-        return self.get(identified_object)
+    def __get__(self, identifier):
+        return self.get(identifier)
+
+    @property
+    def collection(self):
+        return self.__collection
+
+    @collection.setter
+    def collection(self, collection):
+        self.__collection = collection
 
     def add(self, *args):
         for identified_object in args:
-            if not self.contains(identified_object):
+            if identified_object not in self:
                 self.__collection[identified_object.identifier] = identified_object
 
     def remove(self, *args):
@@ -42,21 +43,30 @@ class UniqueIdentifiedObjectCollection():
         pass
 
 
-class MultipleIdentifiedObjectCollection():
+class MultipleIdentifiedObjectCollection:
 
     def __init__(self, *args):
         self.__collection = dict()
-        self.add(args)
+        self.add(*args)
 
     def __add__(self, *args):
-        self.add(args)
+        self.add(*args)
 
     def __sub__(self, *args):
-        self.remove(args)
+        self.remove(*args)
+        
+    def __contains__(self, identified_object):
+        return self.contains(identified_object)
+
+    def __iter__(self):
+        return self.__collection
+
+    def __len__(self):
+        return len(self.__collection.keys())
 
     def add(self, *args):
         for identified_object in args:
-            if self.contains(identified_object):
+            if identified_object in self:
                 self.__collection[identified_object.identifier]['amount'] += 1
             else:
                 self.__collection[identified_object.identifier] = {'amount': 1, 'object': identified_object}
@@ -71,3 +81,4 @@ class MultipleIdentifiedObjectCollection():
 
     def contains(self, identified_object, /):
         return identified_object.identifier in self.__collection.keys()
+

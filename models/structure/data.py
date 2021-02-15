@@ -19,5 +19,19 @@ class ClientCollection(UniqueIdentifiedObjectCollection):
     def __init__(self, *args):
         super().__init__(*args)
 
+    @property
+    def emails(self):
+        lista = []
+        for client in super().collection:
+            print(f"{client = }")
+            lista.append(client.email)
+
+
+
+class EmployeeCollection(UniqueIdentifiedObjectCollection):
+
+    def __init__(self, *args):
+        super().__init__(*args)
+
     def list_emails(self):
         return self.email

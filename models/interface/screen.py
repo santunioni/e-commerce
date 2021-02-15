@@ -27,9 +27,10 @@ class GeneralScreen:
     @staticmethod
     def sign_in():
         clear()
+        full_name = input("Tell me you full namee: ")
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        request.sign_in(email=email, password=password)
+        request.sign_in(full_name=full_name, email=email, password=password)
 
 
 class ClientScreen(GeneralScreen):
@@ -73,11 +74,18 @@ class ClientScreen(GeneralScreen):
         clear()
         if market.status['current_user']:
             kart = market.status['current_user'].kart
-            print(kart)
-            while (command := input("Digite o número do produto que deseja adicionar ao carrinho (quit para sair): ")) \
-                    != 'quit':
-                if command in range(1, len(kart) + 1):
-                    market.status['current_user'].kart.add(kart[int(command)])
+            print("="*50)
+            print("Product ID \t\t product name \t\t price \t\t amount")
+            print("-"*50)
+            print("")
+            for product in kart:
+                amount, obj = product['amount'], product['object']
+                print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
+            print("="*50)
+            # while (command := input("Digite o número do produto que deseja adicionar ao carrinho (quit para sair): ")) \
+            #         != 'quit':
+            #     if command in range(1, len(kart) + 1):
+            #         market.status['current_user'].kart.add(kart[int(command)])
             input("Press enter to leave: ")
 
     @staticmethod
