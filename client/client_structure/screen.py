@@ -45,15 +45,16 @@ class ClientScreen(GeneralScreen):
     @staticmethod
     def display_kart():
         clear()
-        # TODO: re-implement the display_kart method
-        # if client.client_structure.session.status['current_user']:
-        #     kart = client.client_structure.session.status['current_user'].kart
-        #     print("="*75)
-        #     print("Product ID \t\t product name \t\t price \t\t amount")
-        #     print("-"*75)
-        #     print("")
-        #     for product in kart:
-        #         amount, obj = product['amount'], product['object']
-        #         print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
-        #     print("="*75)
+
+        if ClientStatus.active_client():
+            client = ClientStatus.active_client()
+            kart = client.kart
+            print("="*75)
+            print("Product ID \t\t product name \t\t price \t\t amount")
+            print("-"*75)
+            print("")
+            for product in kart:
+                amount, obj = product['amount'], product['object']
+                print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
+            print("="*75)
         input("Press enter to leave: ")
