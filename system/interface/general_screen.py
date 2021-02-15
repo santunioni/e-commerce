@@ -1,4 +1,8 @@
+# LOCAL APP IMPORTS
+# auxiliary functions
 from system.aux_functions.clear import clear
+# classes from the INTERFACE package
+from system.interface.requests import InventoryManager
 
 
 class GeneralScreen:
@@ -21,16 +25,13 @@ class GeneralScreen:
     @staticmethod
     def display_products():
         clear()
-        # TODO: implement the display_products method
-        # inventory = request.inventory()
-        # print("="*75)
-        # print("Product ID \t\t product name \t\t price \t\t amount available")
-        # print("-"*75)
-        # print("")
-        # for product in inventory:
-        #     amount, obj = product['amount'], product['object']
-        #     print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
-        # print("="*75)
-        # if client.client_structure.session.status['current_user']:
-        #     pass
+        inventory_dict = InventoryManager().inventory().dict_form()
+        print("="*75)
+        print("Product ID \t\t product name \t\t price \t\t amount available")
+        print("-"*75)
+        print("")
+        for product_id, product_dict in inventory_dict:
+            print(f"{product_id} \t\t {product_dict['name']} \t\t "
+                  f"{product_dict['price']} \t\t {product_dict['amount']}")
+        print("="*75)
         input("Press enter to leave: ")

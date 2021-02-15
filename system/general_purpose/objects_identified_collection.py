@@ -52,7 +52,7 @@ class MultipleIdentifiedObjectCollection:
 
     def __sub__(self, *args):
         self.remove(*args)
-        
+
     def __contains__(self, identified_object):
         return self.contains(identified_object)
 
@@ -84,13 +84,15 @@ class MultipleIdentifiedObjectCollection:
     def collection(self):
         return self.__collection
 
-    @collection.setter
-    def collection(self, dictionary):
-        for entry_key in dictionary:
-            self.__collection[entry_key] = dictionary[entry_key]
-
     def amount_of(self, identified_object):
         if identified_object in self:
             return self.__collection[identified_object.identifier]['amount']
         return 0
 
+    def dict_form(self):
+        dictionary_var = dict()
+        for obj_id in self.__collection:
+            obj = self.__collection[obj_id]['object']
+            public_attributes = (pb_att for pb_att in dir(self.__collection) if not pb_att.startswith('_'))
+            dictionary_var[obj_id] = {pub_att: obj[pub_att] for pub_att in public_attributes}
+        return dictionary_var

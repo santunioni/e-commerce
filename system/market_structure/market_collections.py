@@ -1,9 +1,10 @@
-# project imports
+# LOCAL APP IMPORTS
+# classes from the GENERAL PURPOSE package
 from system.general_purpose.objects_identified_collection import UniqueIdentifiedObjectCollection
 from system.general_purpose.objects_identified_collection import MultipleIdentifiedObjectCollection
 
 
-class Inventory(MultipleIdentifiedObjectCollection):
+class InventoryModel(MultipleIdentifiedObjectCollection):
 
     def __init__(self, *args):
         super().__init__(*args)
@@ -11,14 +12,14 @@ class Inventory(MultipleIdentifiedObjectCollection):
 
 class ProductsForSell(UniqueIdentifiedObjectCollection):
 
-    def __init__(self, *args):
-        super().__init__(*args)
+    def __init__(self):
+        super().__init__()
 
 
 class ClientCollection(UniqueIdentifiedObjectCollection):
 
-    def __init__(self, *args):
-        super().__init__(*args)
+    def __init__(self):
+        super().__init__()
 
     @property
     def emails(self):
@@ -27,8 +28,9 @@ class ClientCollection(UniqueIdentifiedObjectCollection):
 
 class EmployeeCollection(UniqueIdentifiedObjectCollection):
 
-    def __init__(self, *args):
-        super().__init__(*args)
+    def __init__(self):
+        super().__init__()
 
-    def list_emails(self):
-        return self.email
+    @property
+    def emails(self):
+        return (employee_email for employee_email in super().collection.keys())

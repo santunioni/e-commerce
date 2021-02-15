@@ -1,12 +1,14 @@
-# project imports
+# LOCAL APP IMPORTS
+# importing auxiliary functions
 from system.aux_functions.clear import clear
+# importing the CLIENT and SERVER
 from client.run import run as client_run
 from server.run import run as server_run
 
 
 def dev_page():
     clear()
-    while (user_label := input('Are you a clients or a employees here (c/e)? ').lower()[0]) not in ['c', 'e']:
+    while (user_label := input('Are you a client or a employee here (c/e)? ').lower()[0]) not in ['c', 'e']:
         continue
     if user_label == 'c':
         client_run()

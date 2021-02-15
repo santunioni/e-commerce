@@ -1,4 +1,4 @@
-# python libraries imports
+# PYTHON LIBRARIES IMPORTS
 from os import system, name
 
 

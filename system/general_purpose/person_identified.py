@@ -1,4 +1,5 @@
-# project imports
+# LOCAL APP IMPORTS
+# classes from the GENERAL PURPOSE package
 from system.general_purpose.person import Person
 
 

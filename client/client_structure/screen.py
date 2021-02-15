@@ -1,4 +1,6 @@
-# project imports
+# python libraries imports
+from sys import exit
+# LOCAL APP IMPORTS
 from system.aux_functions.clear import clear
 from system.interface.general_screen import GeneralScreen
 from client.client_structure.status import ClientStatus
@@ -30,15 +32,17 @@ class ClientScreen(GeneralScreen):
         else:
             options = [lambda: ClientStatus.sign_in(*GeneralScreen.sign_in_screen()),
                        lambda: ClientStatus.login(*GeneralScreen.login_screen()),
-                       ClientScreen.display_products]
+                       ClientScreen.display_products,
+                       exit]
             while (number := int(input("""
             Select an option: 
         
             1 - Sign in
             2 - Fazer login
             3 - Listar produtos
-            """))) not in [1, 2, 3]:
-                pass
+            4 - Sair do programa
+            """))) not in [1, 2, 3, 4]:
+                clear()
 
         options[int(number) - 1]()
 

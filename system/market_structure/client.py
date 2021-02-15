@@ -1,7 +1,8 @@
-# python libraries imports
+# PYTHON LIBRARIES IMPORTS
 from passlib.hash import pbkdf2_sha256 as cryp
 
-# project imports
+# LOCAL APP IMPORTS
+# classes from the GENERAL PURPOSE package
 from system.general_purpose.objects_identified_collection import MultipleIdentifiedObjectCollection
 from system.general_purpose.person_identified import IdentifiedPerson
 

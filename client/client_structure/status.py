@@ -1,5 +1,5 @@
-# project imports
-from system.sys_functions.request import ClientCredentials
+# LOCAL APP IMPORTS
+from system.sys_functions.authenticator import ClientCredentials
 
 
 class ClientStatus:
