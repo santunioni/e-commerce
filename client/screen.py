@@ -1,7 +1,8 @@
 import client.session
+import system.sys_functions.request
 import system.sys_functions.request as request
 from system import globals
-from system.general.utility import clear
+from system.aux_functions.clear import clear
 
 
 class GeneralScreen:
@@ -11,7 +12,7 @@ class GeneralScreen:
         clear()
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        client.run.interface.credentials.login(email=email, password=password)
+        system.sys_functions.request.login(email=email, password=password)
 
     @staticmethod
     def sign_in():
@@ -19,7 +20,7 @@ class GeneralScreen:
         full_name = input("Tell me you full namee: ")
         email = input("Tell me you email: ")
         password = input("Tell me you password: ")
-        client.run.interface.credentials.sign_in(full_name=full_name, email=email, password=password)
+        system.sys_functions.request.sign_in(full_name=full_name, email=email, password=password)
 
 
 class ClientScreen(GeneralScreen):
@@ -32,7 +33,7 @@ class ClientScreen(GeneralScreen):
             options = [ClientScreen.display_products,
                        ClientScreen.display_kart,
                        request.close_order,
-                       client.run.interface.credentials.logout]
+                       system.sys_functions.request.logout]
             while (number := int(input("""
             Select an option: 
         

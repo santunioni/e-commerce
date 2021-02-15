@@ -1,4 +1,5 @@
-from os import system, name
+# python libraries imports
+# from os import system, name
 
 
 def clear():

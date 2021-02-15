@@ -1,11 +1,16 @@
+# python libraries imports
 from os.path import join as os_path_join
-from os import getcwd
+from os import pardir as parent_directory
 
-DIR = getcwd()
+ROOT_DIR = parent_directory
 
-CLIENTS_LIST_PATH = os_path_join(DIR, '../database', 'client', "clients.pickle")
-EMPLOYEES_LIST_PATH = os_path_join(DIR, '../database', 'employee', "employees.pickle")
-INVENTORY_PATH_CSV = os_path_join(DIR, '../database', 'inventory', "inventory.csv")
-INVENTORY_PATH_PICKLE = os_path_join(DIR, '../database', 'inventory', "inventory.pickle")
+CLIENTS_FILES_PATH = os_path_join(ROOT_DIR, 'database', 'clients')
+CLIENTS_EMAILS_LIST_PATH = os_path_join(ROOT_DIR, 'database', 'server', 'clients_emails.csv')
 
-del os_path_join, getcwd
+EMPLOYEES_FILES_PATH = os_path_join(ROOT_DIR, 'database', 'employees')
+EMPLOYEES_EMAILS_LIST_PATH = os_path_join(ROOT_DIR, 'database', 'server', "employees_emails.csv")
+
+INVENTORY_PATH_CSV = os_path_join(ROOT_DIR, 'database', 'server', "inventory.csv")
+INVENTORY_PATH_PICKLE = os_path_join(ROOT_DIR, 'database', 'server', "inventory.pickle")
+
+del os_path_join, parent_directory

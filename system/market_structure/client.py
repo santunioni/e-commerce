@@ -1,6 +1,9 @@
-from system.general_purpose.person_identified_collection import MultipleIdentifiedObjectCollection
-from system.general_purpose.person_identified import IdentifiedPerson
+# python libraries imports
 from passlib.hash import pbkdf2_sha256 as cryp
+
+# project imports
+from system.general_purpose.objects_identified_collection import MultipleIdentifiedObjectCollection
+from system.general_purpose.person_identified import IdentifiedPerson
 
 
 class Client(IdentifiedPerson):

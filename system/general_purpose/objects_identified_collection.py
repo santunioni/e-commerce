@@ -94,4 +94,3 @@ class MultipleIdentifiedObjectCollection:
             return self.__collection[identified_object.identifier]['amount']
         return 0
 
-    

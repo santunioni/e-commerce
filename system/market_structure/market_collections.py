@@ -1,5 +1,6 @@
-from system.general_purpose.person_identified_collection import UniqueIdentifiedObjectCollection
-from system.general_purpose.person_identified_collection import MultipleIdentifiedObjectCollection
+# project imports
+from system.general_purpose.objects_identified_collection import UniqueIdentifiedObjectCollection
+from system.general_purpose.objects_identified_collection import MultipleIdentifiedObjectCollection
 
 
 class Inventory(MultipleIdentifiedObjectCollection):

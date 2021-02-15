@@ -6,5 +6,5 @@ class Session:
 
 status = {
     'current_user': None,
-    'user_type': None
+    'user_type': 'clients'
 }
