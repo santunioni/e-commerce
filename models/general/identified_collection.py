@@ -6,8 +6,9 @@ class UniqueIdentifiedObjectCollection:
     def __contains__(self, identified_object):
         return self.contains(identified_object)
 
-    def __get__(self, identifier):
-        return self.get(identifier)
+    def __getitem__(self, identifier):
+        if identifier in self.__collection.keys():
+            return self.__collection['identifier']
 
     @property
     def collection(self):
@@ -29,10 +30,6 @@ class UniqueIdentifiedObjectCollection:
 
     def contains(self, identified_object, /):
         return identified_object.identifier in self.__collection.keys()
-
-    def get(self, identifier):
-        if identifier in self.__collection.keys():
-            return self.__collection['identifier']
 
     def search(self):
         # TODO: implement the search method()
@@ -59,7 +56,7 @@ class MultipleIdentifiedObjectCollection:
         return self.contains(identified_object)
 
     def __iter__(self):
-        return self.__collection
+        return iter(self.__collection.keys())
 
     def __len__(self):
         return len(self.__collection.keys())
@@ -81,4 +78,3 @@ class MultipleIdentifiedObjectCollection:
 
     def contains(self, identified_object, /):
         return identified_object.identifier in self.__collection.keys()
-

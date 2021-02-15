@@ -21,10 +21,7 @@ class ClientCollection(UniqueIdentifiedObjectCollection):
 
     @property
     def emails(self):
-        lista = []
-        for client in super().collection:
-            print(f"{client = }")
-            lista.append(client.email)
+        return (client_email for client_email in super().collection.keys())
 
 
 

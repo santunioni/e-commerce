@@ -20,7 +20,7 @@ def login(*, email, password):
 
     with open(path, 'rb') as file:
         clients_list = pickle.load(file)
-    if email in clients_list:
+    if email in clients_list.emails:
         current_user = clients_list['email']
         if current_user.check_pass(password):
             market.status['current_user'] = clients_list['email']
@@ -36,6 +36,7 @@ def login(*, email, password):
 
 def sign_in(full_name, email, password):
     # TODO: implement the sign_in function
+    # FIX IT: something is wrong here
 
     if market.status['user_type'] == 'employee':
         path = market.EMPLOYEES_LIST_PATH
@@ -46,6 +47,7 @@ def sign_in(full_name, email, password):
         clients_list = pickle.load(file)
     if email in clients_list.emails:
         print("User is already registered. Perhaps you want to log in? ")
+        sleep(2)
     else:
         current_user = Client(full_name=full_name, email=email, password=password)
         clients_list.add(current_user)
