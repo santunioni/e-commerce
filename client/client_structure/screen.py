@@ -1,5 +1,8 @@
 # python libraries imports
 from sys import exit
+# imported only for MYPY type hinting
+from typing import Union
+from system.market_structure.client import Client
 # LOCAL APP IMPORTS
 from system.aux_functions.clear import clear
 from system.interface.general_screen import GeneralScreen
@@ -9,11 +12,11 @@ from client.client_structure.status import ClientStatus
 class ClientScreen(GeneralScreen):
 
     @staticmethod
-    def initial_page():
+    def initial_page() -> None:
         clear()
 
         if ClientStatus.active_client():
-            client = ClientStatus.active_client()
+            client: Client = ClientStatus.active_client()
             options = [ClientScreen.display_products,
                        ClientScreen.display_kart,
                        client.close_order,
@@ -47,18 +50,19 @@ class ClientScreen(GeneralScreen):
         options[int(number) - 1]()
 
     @staticmethod
-    def display_kart():
+    def display_kart() -> None:
         clear()
 
         if ClientStatus.active_client():
-            client = ClientStatus.active_client()
-            kart = client.kart
+            client: Client = ClientStatus.active_client()
+            products_dict: dict = client.kart.dict_form()
             print("="*75)
-            print("Product ID \t\t product name \t\t price \t\t amount")
+            print("Product ID \t\t Product Name \t\t Price \t\t Amount \t\t Cost")
             print("-"*75)
             print("")
-            for product in kart:
-                amount, obj = product['amount'], product['object']
-                print(f"{obj.identifier} \t\t {obj.name} \t\t {obj.price} \t\t {amount}")
+            for product_id, product_dict in products_dict:
+                print(f"{product_id} \t\t {product_dict['name']} \t\t "
+                      f"{product_dict['price']} \t\t {product_dict['amount']}"
+                      f"{product_dict['amount']*product_dict['price']}")
             print("="*75)
-        input("Press enter to leave: ")
+            input("Press enter to leave: ")

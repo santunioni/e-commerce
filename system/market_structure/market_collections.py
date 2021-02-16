@@ -1,7 +1,9 @@
 # LOCAL APP IMPORTS
 # classes from the GENERAL PURPOSE package
-from system.general_purpose.objects_identified_collection import UniqueIdentifiedObjectCollection
-from system.general_purpose.objects_identified_collection import MultipleIdentifiedObjectCollection
+from system.general_purpose.identified_objects_collections import UniqueIdentifiedObjectCollection
+from system.general_purpose.identified_objects_collections import MultipleIdentifiedObjectCollection
+# importing for MYPY type hinting
+from typing import Generator, Any
 
 
 class InventoryModel(MultipleIdentifiedObjectCollection):
@@ -22,7 +24,7 @@ class ClientCollection(UniqueIdentifiedObjectCollection):
         super().__init__()
 
     @property
-    def emails(self):
+    def emails(self) -> Generator[str, None, None]:
         return (client_email for client_email in super().collection.keys())
 
 
@@ -32,5 +34,5 @@ class EmployeeCollection(UniqueIdentifiedObjectCollection):
         super().__init__()
 
     @property
-    def emails(self):
+    def emails(self) -> Generator[str, None, None]:
         return (employee_email for employee_email in super().collection.keys())

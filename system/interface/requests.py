@@ -16,26 +16,27 @@ from system.market_structure.client import Kart
 
 class InventoryManager:
 
+    __inventory: InventoryModel
     # inicialize __INVENTORY variable
     if os_path_exists(INVENTORY_PATH_PICKLE):
         with open(INVENTORY_PATH_PICKLE, 'rb') as invent_file:
             __inventory = pickle.load(invent_file)
     else:
-        __inventory: InventoryModel = InventoryModel()
+        __inventory = InventoryModel()
         with open(INVENTORY_PATH_PICKLE, 'xb') as invent_file:
             pickle.dump(__inventory, invent_file)
 
     @staticmethod
-    def inventory():
+    def inventory() -> InventoryModel:
         return InventoryManager.__inventory
 
     @classmethod
-    def update(cls):
+    def update(cls) -> None:
         with open(INVENTORY_PATH_PICKLE, 'rb') as invent_file:
             cls.__inventory = pickle.load(invent_file)
 
     @classmethod
-    def deduct_order(cls, order: Kart):
+    def deduct_order(cls, order: Kart) -> None:
         cls.update()
         cls.__inventory -= order
         with open(INVENTORY_PATH_PICKLE, 'wb') as invent_file:

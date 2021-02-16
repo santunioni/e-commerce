@@ -2,7 +2,7 @@
 from os import system, name
 
 
-def clear():
+def clear() -> None:
     """This function clear the terminal screen, either for Linux, Mac or Windows."""
     # for windows
     if name == 'nt':

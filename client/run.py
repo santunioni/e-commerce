@@ -1,7 +1,7 @@
 from client.client_structure.screen import ClientScreen
 
 
-def run():
+def run() -> None:
     while True:
         ClientScreen.initial_page()
 
